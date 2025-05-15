@@ -10,6 +10,13 @@
     <div class="theme-toggle-container">
         <button id="themeToggle" class="theme-toggle" aria-label="Toggle day/night mode">🌙</button>
     </div>
+    <!-- Add image at the front of the website -->
+    <div class="header-image" style="text-align:center; margin-top:20px;">
+        <img id="headerImg" src="tt.png" alt="EngineerBabu CSE Banner" style="max-width:100%;height:auto; width:400px;">
+        <div style="margin-top:10px;">
+            <input type="range" id="imgWidthSlider" min="100" max="1000" value="400" style="width:60%;">
+        </div>
+    </div>
     <div class="container">
         <!-- All content rendered by JS -->
     </div>
@@ -21,5 +28,15 @@
         </div>
     </div>
     <script src="script.js"></script>
+    <script>
+    // Make header image adjustable
+    const img = document.getElementById('headerImg');
+    const slider = document.getElementById('imgWidthSlider');
+    if (img && slider) {
+        slider.addEventListener('input', function() {
+            img.style.width = this.value + 'px';
+        });
+    }
+    </script>
 </body>
 </html>
