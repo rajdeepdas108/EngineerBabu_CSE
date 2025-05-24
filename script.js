@@ -18,6 +18,50 @@ const filesData = [
         categories: ["Proposals"],
         thumb: "assets/sample-thumb.jpg"
     },
+    
+    {
+        name: "Chem--Org",
+        type: "pdf",
+        url: "assets/Chem/Chemistry - I.pdf",
+        date: "2023-11-28",
+        size: "1.2 MB",
+        categories: ["Chemistry"],
+        thumb: "assets/Chem/Chemistry - I.pdf"
+    },
+    
+    {
+        name: "Eng--Org",
+        type: "pdf",
+        url: "assets/English/English .pdf",
+        date: "2023-11-28",
+        size: "1.2 MB",
+        categories: ["English"],
+        thumb: "assets/English/English .pdf"
+    },
+    
+    
+    {
+        name: "Math--Org",
+        type: "pdf",
+        url: "assets/M201/Mathematics - IIA .pdf",
+        date: "2023-11-28",
+        size: "1.2 MB",
+        categories: ["Mathematics"],
+        thumb: "assets/M201/Mathematics - IIA .pdf"
+    },
+    
+    
+    
+    {
+        name: "pps--Org",
+        type: "pdf",
+        url: "assets/Cp/Programming for problem solving .pdf",
+        date: "2023-11-28",
+        size: "1.2 MB",
+        categories: ["C-Programming"],
+        thumb: "assets/Cp/Programming for problem solving .pdf"
+    },
+
     {
         name: "Team Photo",
         type: "image",
