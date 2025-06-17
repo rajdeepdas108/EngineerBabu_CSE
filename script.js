@@ -1,13 +1,13 @@
 // Demo MVP: Card-based document viewer with categories, search (no upload, no backend)
 const filesData = [
     {
-        name: "Annual Report 2023",
+        name: "Organisation & Module- 3rd sem",
         type: "pdf",
-        url: "assets/sample.pdf",
+        url: "https://drive.google.com/drive/folders/1gPKn6zLmMOguZPBraZZCmbkhdcdvDLPR",
         date: "2023-12-15",
         size: "2.4 MB",
         categories: ["Reports"],
-        thumb: "assets/sample-thumb.jpg"
+        thumb: "https://drive.google.com/drive/folders/1gPKn6zLmMOguZPBraZZCmbkhdcdvDLPR"
     },
     {
         name: "Project Proposal",
