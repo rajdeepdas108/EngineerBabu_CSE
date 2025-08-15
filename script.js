@@ -114,27 +114,37 @@ function renderCards() {
     const grid = document.createElement('div');
     grid.className = 'card-grid';
     if (filteredFiles.length === 0) {
-        grid.innerHTML = `<div class="empty-message">No documents found.</div>`;
+        grid.innerHTML = `
+            <div class="empty-message">
+                No documents found matching your criteria.
+                <div style="font-size: 1rem; margin-top: 12px; opacity: 0.8;">Try adjusting your search or category filter.</div>
+            </div>`;
         return grid;
     }
     filteredFiles.forEach((file, idx) => {
+        const fileIcon = getFileIcon(file.type);
+        // Ensure proper text wrapping for long names
+        const displayName = file.name.length > 45 ? file.name.substring(0, 42) + '...' : file.name;
         grid.innerHTML += `
         <div class="doc-card">
             <div class="thumb-wrap">
-                <img src="${file.thumb || (file.type === 'pdf' ? 'assets/pdf-icon.png' : file.url)}" class="thumb" alt="">
                 <span class="file-type">${file.type.toUpperCase()}</span>
             </div>
             <div class="doc-info">
-                <div class="doc-title">${file.name}</div>
+                <div class="doc-title" title="${file.name}">${file.name}</div>
                 <div class="doc-meta">
-                    <span>${file.date}</span> • <span>${file.size}</span>
+                    <span>${formatDate(file.date)}</span> • <span>${file.size}</span>
                 </div>
                 <div class="doc-tags">
-                    ${file.categories.map(cat => `<span class="doc-tag">${cat}</span>`).join('')}
+                    ${file.categories.map(cat => `<span class="doc-tag" title="${cat}">${cat}</span>`).join('')}
                 </div>
                 <div class="doc-actions">
-                    <button class="view-btn" data-idx="${idx}">View</button>
-                    <a class="download-btn" href="${file.url}" download="${file.name}">Download</a>
+                    <button class="view-btn" data-idx="${idx}" title="View ${file.name}">
+                        👁️ View
+                    </button>
+                    <a class="download-btn" href="${file.url}" download="${file.name}" title="Download ${file.name}">
+                        ⬇️ Get
+                    </a>
                 </div>
             </div>
         </div>
@@ -143,16 +153,48 @@ function renderCards() {
     return grid;
 }
 
+function getFileIcon(type) {
+    const icons = {
+        'pdf': '📄',
+        'image': '🖼️',
+        'doc': '📝',
+        'docx': '📝',
+        'txt': '📋',
+        'default': '📁'
+    };
+    return icons[type] || icons['default'];
+}
+
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'short', 
+        day: 'numeric' 
+    });
+}
+
 function renderUI() {
     const container = $('.container');
     container.innerHTML = `
-        <h1 style="text-align:left;font-size:2rem;margin-bottom:0.5em;"><span style="color:#2563eb;font-weight:700;">DocViewer</span></h1>
-        <h2 style="margin-top:2em;">Categories</h2>
-        <div id="categoryBar"></div>
-        <div style="margin:18px 0 24px 0;">
-            <input id="searchInput" class="search-input" type="text" placeholder="Search documents..." style="width:100%;max-width:350px;padding:10px 14px;border-radius:6px;border:1px solid #ddd;font-size:1rem;">
-        </div>
-        <div id="cardGrid"></div>
+        <section>
+            <h2 class="section-title">📚 Document Categories</h2>
+            <div id="categoryBar"></div>
+            <div style="text-align: center;">
+                <input id="searchInput" class="search-input" type="text" placeholder="🔍 Search your documents..." aria-label="Search documents">
+            </div>
+        </section>
+        <section style="margin-top: 48px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                <h3 style="margin: 0; color: var(--text-secondary); font-size: 1.3rem; font-weight: 600;">
+                    📋 Your Documents (${filteredFiles.length})
+                </h3>
+                <div style="color: var(--text-muted); font-size: 1rem; font-style: italic; font-weight: 500;">
+                    ${filteredFiles.length === 0 ? 'No documents to display' : `Showing ${filteredFiles.length} document${filteredFiles.length !== 1 ? 's' : ''}`}
+                </div>
+            </div>
+            <div id="cardGrid"></div>
+        </section>
     `;
     $('#categoryBar').replaceWith(renderCategories());
     $('#cardGrid').replaceWith(renderCards());
@@ -220,24 +262,27 @@ window.onclick = function(event) {
     }
 };
 
-// Theme logic (unchanged)
-function setTheme(night) {
-    if (night) {
-        document.body.classList.add('night');
-        $('#themeToggle').textContent = "☀️";
-        localStorage.setItem('theme', 'night');
+// Theme logic - Updated for data attribute approach
+function setTheme(isDark) {
+    if (isDark) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        $('#themeToggle .toggle-icon').textContent = "☀️";
+        localStorage.setItem('theme', 'dark');
     } else {
-        document.body.classList.remove('night');
-        $('#themeToggle').textContent = "🌙";
-        localStorage.setItem('theme', 'day');
+        document.documentElement.setAttribute('data-theme', 'light');
+        $('#themeToggle .toggle-icon').textContent = "🌙";
+        localStorage.setItem('theme', 'light');
     }
 }
+
 $('#themeToggle').onclick = function() {
-    setTheme(!document.body.classList.contains('night'));
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    setTheme(!isDark);
 };
+
 (function initTheme() {
     const saved = localStorage.getItem('theme');
-    setTheme(saved === 'night');
+    setTheme(saved === 'dark');
 })();
 
 // Initial render
