@@ -10,13 +10,13 @@ const filesData = [
         thumb: "https://drive.google.com/drive/folders/1gPKn6zLmMOguZPBraZZCmbkhdcdvDLPR"
     },
     {
-        name: "Project Proposal",
-        type: "pdf",
-        url: "assets/sample.pdf",
-        date: "2023-11-28",
+        name: "CO_LAB_FILES",
+        type: "FOLDER",
+        url: "https://drive.google.com/drive/folders/1Q6R00k1fy6CPn4Wo1Ib92MsuCmlR8HWB?usp=sharing",
+        date: "2025-09-02",
         size: "1.2 MB",
         categories: ["Proposals"],
-        thumb: "assets/sample-thumb.jpg"
+        thumb: "https://drive.google.com/drive/folders/1Q6R00k1fy6CPn4Wo1Ib92MsuCmlR8HWB?usp=sharing"
     },
     
     {
