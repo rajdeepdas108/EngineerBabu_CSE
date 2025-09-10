@@ -20,13 +20,13 @@ const filesData = [
     },
     
     {
-        name: "Chem--Org",
+        name: "DSA_LAB_CODES_FILE",
         type: "pdf",
-        url: "assets/Chem/Chemistry - I.pdf",
+        url: "https://drive.google.com/drive/folders/1pCzVr3MQ56pWM1QvTkprvv3AjEiCmx-h?usp=drive_link",
         date: "2023-11-28",
         size: "1.2 MB",
         categories: ["Chemistry"],
-        thumb: "assets/Chem/Chemistry - I.pdf"
+        thumb: "https://drive.google.com/drive/folders/1pCzVr3MQ56pWM1QvTkprvv3AjEiCmx-h?usp=drive_link"
     },
     
     {
